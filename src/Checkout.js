@@ -26,10 +26,6 @@ function Checkout() {
                          rating={item.rating} 
                         />
                     ))}
-                    {/*BaketItem */}
-                    {/*BaketItem */}
-                    {/*BaketItem */}
-                    {/*BaketItem */}
                 </div>
 
             </div>

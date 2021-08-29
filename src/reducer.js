@@ -13,6 +13,34 @@ const reducer = (state, action) =>{
                 ...state,
                 basket:[...state.basket, action.item],
             };
+
+            case "REMOVE_FROM_BASKET":
+                //this finds the first one and returs that, no more
+                const index = state.basket.findIndex(
+                    (basketItem) => basketItem.id ===action.id
+                );
+                let newBasket =[...state.basket];
+                if(index>=0){
+                    newBasket.splice(index, 1);
+
+                }
+                else{
+                    console.warn('Cant remove product (id: ${action.id}) as its not in bsaket!!!')
+                }
+
+                return {
+                    ...state, basket:newBasket
+                }
+                /*
+                THIS REMOVES EVERY ITEM WITH THE SAME ID (IF WE PUT IN OUR
+                BASKET TWO SAME ITEM AND WE WANT TO REMOVE
+                ONE IT WILL REMOVE ALL WITH THAT ID)
+                return {
+                    ...state,
+                    basket: state.basket.filter(
+                        item=>item.id !== action.id
+                        )}*/
+
             default:
                 return state;
     }
