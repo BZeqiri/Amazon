@@ -15,7 +15,7 @@ function Payment() {
 
 
     const stripe = useStripe();
-    const elemens = useElements();
+    const elements = useElements();
 
     const [succeeded, setSucceeded] = useState(false);
     const [processing, setProcessing] = useState("");
@@ -31,7 +31,7 @@ function Payment() {
            const response = await axios({
                method:'post',
                //stripe expect the total in currency subunits
-               url:`/payments/create?total=${getBasketTotal(basket) * 100}` 
+               url:`/payments/create?total=${getBasketTotal(basket) * 100}`
            });
            setClientSecret(response.data.clientSecret)
         }
@@ -44,10 +44,9 @@ function Payment() {
         //do all the fancy stripe stuff
         event.preventDefault();
         setProcessing(true);
-        //const payload = await stripe 
         const payload = await stripe.confirmCardPayment(clientSecret,{
             payment_method:{
-                card:Elements.getElement(CardElement)
+                card:elements.getElement(CardElement)
             }
             //paymnetIntent = payment confirmation
         }).then(({paymentIntent})=>{
