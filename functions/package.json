@@ -19,7 +19,7 @@
     "firebase-admin": "^9.8.0",
     "firebase-functions": "^3.14.1",
     "firebase-tools": "^9.21.0",
-    "stripe": "^8.184.0"
+    "stripe": "^8.185.0"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
