@@ -7,6 +7,7 @@ import './Payment.css';
 import { getBasketTotal } from './reducer';
 import { useStateValue } from './StateProvider';
 import axios from 'axios';
+import {db} from './firebase';
 
 function Payment() {
 
@@ -50,6 +51,19 @@ function Payment() {
             }
             //paymnetIntent = payment confirmation
         }).then(({paymentIntent})=>{
+
+
+            db.collection('users')
+            .doc(user?.id)
+            .collection('orders')
+            .doc(paymentIntent.id)
+            .set({
+                basket: basket,
+                amount: paymentIntent.amount,
+                created: paymentIntent.created
+            })
+
+
             setSucceeded(true);
             setError(null);
             setProcessing(false);
@@ -73,7 +87,7 @@ function Payment() {
         <div className='payment'>
             <div className='payment__container'>
                 <h1>
-                    Checkout(<Link to="?checkout">{basket?.length} items</Link>)
+                    Checkout(<Link to="/Checkout">{basket?.length} items</Link>)
                 </h1>
                 {/* Payment section - delivery address*/}
                 <div className='payment__section'>
