@@ -40,6 +40,7 @@ function Payment() {
      },[basket])
      
      console.log('The Secret is >>>', clientSecret);
+     console.log('Person', user);
 
     const  handleSubmit = async (event) =>{
         //do all the fancy stripe stuff
@@ -54,7 +55,7 @@ function Payment() {
 
 
             db.collection('users')
-            .doc(user?.id)
+            .doc(user?.uid)
             .collection('orders')
             .doc(paymentIntent.id)
             .set({
@@ -131,7 +132,7 @@ function Payment() {
                                 <CurrencyFormat
                                 renderText={(value)=>(
                                     <>
-                                    <h3>Order Total:{value}</h3>
+                                    <h3 className="order__total">Order Total:{value}</h3>
                                     </>
                                 )}
                                 decimalScale={2}
